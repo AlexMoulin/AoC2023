@@ -67,7 +67,23 @@ function addAllCalibration(calibrations){
     return sumTotal
 }
 
-var startTime = performance.now();
-console.log(addAllCalibration(calibrationDecrytion(fileReader('./input.txt'))));
-var endTime = performance.now();
-console.log(`It took ${endTime - startTime} ms`);
+function performanceTest(runs){
+    let startTime;
+    let endTime;
+    let timeTotal = 0;
+    let minTime = 9999999;
+    let maxTime = 0;
+    for(let i = 0; i <= runs; i++){
+        startTime = performance.now();
+        console.log(addAllCalibration(calibrationDecrytion(fileReader('./input.txt'))));
+        endTime = performance.now();
+        let timeTaken = (endTime - startTime)
+        minTime = minTime > timeTaken ? timeTaken : minTime;
+        maxTime = maxTime < timeTaken ? timeTaken : maxTime;
+        timeTotal += timeTaken;
+    }
+
+console.log(`It took an average ${Math.ceil(timeTotal / runs)}ms. Min was ${Math.ceil(minTime)}ms. Max was ${Math.ceil(maxTime)}ms`);
+}
+
+performanceTest(1000);
