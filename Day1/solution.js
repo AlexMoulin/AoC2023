@@ -86,4 +86,4 @@ function performanceTest(runs){
 console.log(`It took an average ${Math.ceil(timeTotal / runs)}ms. Min was ${Math.ceil(minTime)}ms. Max was ${Math.ceil(maxTime)}ms`);
 }
 
-performanceTest(1000);
+performanceTest(100);
