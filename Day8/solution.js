@@ -44,6 +44,7 @@ function part2(file) {
     .slice(2)
     .map((item) => item.split(/[^A-Z]/).filter((item) => item !== ""));
   const formattedNodes = [];
+  console.log("Getting numbers")
 
   for (const node of nodes) {
     const key = node[0];
@@ -81,22 +82,30 @@ function part2(file) {
   allCounts.sort(function (a, b) {
     return a - b;
   });
-
+  console.log(`Numbers found ${allCounts}, getting lowest common multiplier`)
   return smallestCommons(allCounts);
 }
 
 function smallestCommons(arr) {
-    while(arr.length > 0){
+  console.log(`Getting lcm for: ${arr[0]} and ${arr[1]}`)
+    while(arr.length > 1){
+      console.log(`Getting lcm for: ${arr[0]} and ${arr[1]}`)
         let SCM = (arr[0] * arr[1]) / greatestCommonDivisor(arr[0], arr[1]);
     arr[1] = SCM;
     arr.shift()
     }
+    return arr[0]
 }
 
 const greatestCommonDivisor = (a, b) => {
-  const remainder = a % b;
-  if (remainder === 0) return b;
-  return greatestCommonDivisor(b, remainder);
+  let remainder = b % a;
+  let lastB = b;
+  while(remainder > 0){
+    console.log(`Getting gcd for : ${a} and ${b}. Remains: ${remainder}`)
+    lastB = remainder;
+    remainder = a % lastB;
+  }
+  return lastB;
 };
 
 //console.log(part2("./input.txt"));
